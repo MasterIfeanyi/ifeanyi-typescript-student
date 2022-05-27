@@ -24,8 +24,9 @@ function App() {
 
 
           {/* protected routes */}
-          
-          <Route path="/" element={<Student />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Student />} />
+          </Route>
                  
 
           {/* catch all */}
