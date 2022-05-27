@@ -3,7 +3,7 @@
 
 ## The first issue
 
-<p>Correct type for useLocation() from react-router-dom </p>
+Correct type for `useLocation()` from react-router-dom
 
 
 I ran into a type assertion issue when using `useLocation` hook from `react-router-dom`
