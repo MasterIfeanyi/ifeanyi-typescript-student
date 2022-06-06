@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import axios from "../api/axios"
+import axios from "../api/axios";
+import { AxiosError } from "axios";
 
 type AuthUser = {
   user: string
@@ -33,11 +34,14 @@ export const UserContextProvider = (props: UserContextProviderProps) => {
     // if used in more components, this should be in context
     try {
       // axios to /logout endpoint 
-      await axios.get("/logout");
+      await axios.get("/logout", {
+        withCredentials: true
+      });
       navigate('login');
       setAuth({} as AuthUser);
-    } catch (error: any) {
-      console.error(error.message);
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error(err.message);
     }
   }
 

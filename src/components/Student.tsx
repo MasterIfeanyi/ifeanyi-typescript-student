@@ -4,6 +4,7 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import StudentForm from "./StudentForm"
 import User from "./User"
 import { UserType } from '../types/Student'
+import { AxiosError } from "axios";
 // import { LocationState } from "../types/LocationState"
 
 const Student = () => {
@@ -35,9 +36,13 @@ const Student = () => {
                 // set student state when component mounts
                 isMounted && setBackEndData(data)
             } catch (error) {
-                console.error(error);
+                const err = error as AxiosError;
                 // when refreshToken expires
-                navigate("/login", { state: { from: location }, replace: true });
+                if (process.env.NODE_ENV === "development" || err) {
+                    console.log(err.message);
+                } else {
+                    navigate("/login", { state: { from: location }, replace: true });
+                }
             }
         }
 
@@ -48,7 +53,7 @@ const Student = () => {
             // don't set state if component unmounts
             isMounted = false;
             // cancel request if component unmounts
-            // controller.abort();
+            controller.abort();
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
