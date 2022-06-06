@@ -37,10 +37,10 @@ const Student = () => {
                 isMounted && setBackEndData(data)
             } catch (error) {
                 const err = error as AxiosError;
-                // when refreshToken expires
-                if (process.env.NODE_ENV === "development" || err) {
+                if (process.env.NODE_ENV === "production" && err) {
                     console.log(err.message);
                 } else {
+                    // when refreshToken expires
                     navigate("/login", { state: { from: location }, replace: true });
                 }
             }
