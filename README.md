@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple web application that allows a user to submit their personal information to a coud database.
+This is a simple web application that allows a user to submit their personal information to a cloud database.
 
 This project was built using typescript.
 
